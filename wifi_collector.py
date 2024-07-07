@@ -13,11 +13,11 @@ def windows_wifi():
         var2='Key Content'
     print("\n ***** WIFI Passoword check ongoing ... \n")
     data = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('cp1252').split('\n')
-    profiles = [i.split(":")[1][1:-1] for i in data if "Profil Tous les utilisateurs" in i]
+    profiles = [i.split(":")[1][1:-1] for i in data if var1 in i]
     for i in profiles:
         results = subprocess.check_output(['netsh', 'wlan', 'show', 'profile', i, 'key=clear']).decode('cp1252').split('\n')
         #print(results)
-        results = [b.split(":")[1][1:-1] for b in results if "Contenu de la cl" in b]
+        results = [b.split(":")[1][1:-1] for b in results if var2 in b]
         try:
             print ("{:<30}|  {:<}".format(i, results[0]))
         except IndexError:
